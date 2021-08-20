@@ -2,6 +2,7 @@ import json
 
 import requests
 
+
 class FiroWalletAPI:
 
     def __init__(self, httpprovider):
@@ -94,8 +95,6 @@ class FiroWalletAPI:
         print(response)
         return response
 
-
-
     """
         Send Transaction 
     """
@@ -112,7 +111,6 @@ class FiroWalletAPI:
 
         print(response)
         return response
-
 
     """ 
     """

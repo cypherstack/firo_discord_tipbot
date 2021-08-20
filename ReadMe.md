@@ -12,11 +12,11 @@ Clone firo tip bot repo:
 Install python requirement packages
 <pre>pip3 install -r requirements.txt</pre>
 
-To check if the bot works correct:
+To check if the bot works correct (after MangoDB, Firod, and the services.json are set up):
 <pre>python3 tipbot.py</pre>
 If there's not exceptions, use Ctrl+C to break the process.
 
-Configure TipBot init script
+### Configure TipBot
 <pre>vim /etc/systemd/system/tipbot.service</pre>
 
 Paste
@@ -47,15 +47,56 @@ PrivateTmp=true
 WantedBy=multi-user.target
 </pre>
 
+Get your Discord bot token following these instructions.
+1) Create your discord server.
+2) https://discordapp.com/developers/applications/
+3) Click "New Application".
+4) Name the bot.
+5) Go to "Bot" and click add a bot.
+6) Click "Copy" and get the bot_token.
+7) Go to "OAuth2" .
+   1) Click "bot" in scopes.
+   2) add the following bot permissions.
+      1) Send Messages
+      2) Public Threads
+      3) Private Threads
+      4) Manage Messages
+      5) Attach Files
+      6) Read Message History
+      7) Use External Emojis
+      8) Add Reactions
+      9) View Channels.
+   3) Copy the url given by the scopes, and enter it in the search bar.
+      1) Approve adding the bot to the server of your choice.
+8) Create a private channel in your server called tipbot_logs.
+
+Configure the services.json with your relevant information. 
+<pre>
+... bot_token should be set to your Discord Bots token.
+    "discord_bot":
+    {
+      "bot_token":"your_discord_bot_token_goes_here"
+    },
+... 
+    "httpprovider": "http://username:password@localhost:8888",
+    "log_ch": "tipbot_logs",
+     "discord_server": "discord_server_name",
+    "admins": {
+      "yourdiscordname": true
+    }
+</pre>
+
+Next run
+
 <pre>systemctl daemon-reload</pre>
 
-Run the following systemctl command to start the MongoDB service:
+Run the following systemctl command to start the Tipbot service:
 <pre>sudo systemctl start tipbot.service</pre>
  
 Then check the service’s status.
 <pre>sudo systemctl status tipbot.service</pre>
 
-After confirming that the service is running as expected, enable the MongoDB service to start up at boot:
+After confirming that the service is running as expected, enable the Tipbot service to start up at boot:
 <pre>sudo systemctl enable tipbot.service</pre>
 
 To stop the service
