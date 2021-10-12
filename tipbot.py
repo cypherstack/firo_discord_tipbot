@@ -646,7 +646,7 @@ async def red_envelope_created(variables, first_name):
     image_name = 'created.png'
     im.save(image_name)
     try:
-        message = await variables.message.channel.send('Catch Firo✋', file=discord.File(image_name))
+        message = await variables.message.channel.send('Catch Firo✋Please react to the message!', file=discord.File(image_name))
         return message.id
     except Exception as exc:
         await send_to_logs(exc)
