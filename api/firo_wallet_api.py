@@ -15,7 +15,7 @@ class FiroWalletAPI:
         response = requests.post(
             self.httpprovider,
             data=json.dumps(
-                {"jsonrpc": "1.0", "id": 1, "method": "getnewaddress"}
+                {"jsonrpc": "1.0", "id": 1, "method": "getsparkdefaultaddress"}
             )).json()
         print(response)
         return response['result']
@@ -36,7 +36,7 @@ class FiroWalletAPI:
         response = requests.post(
             self.httpprovider,
             data=json.dumps(
-                {"jsonrpc": "1.0", "id": 2, "method": "listlelantusmints"}
+                {"jsonrpc": "1.0", "id": 2, "method": "listsparkmints"}
             )).json()
 
         return response
@@ -98,15 +98,15 @@ class FiroWalletAPI:
     """
         Send Transaction 
     """
-    def joinsplit(self, address, value):
+    def joinsplit(self, address, value, memo):
         response = requests.post(
             self.httpprovider,
             data=json.dumps(
                 {
                     "jsonrpc": "1.0",
                     "id": 4,
-                    "method": "joinsplit",
-                    "params": [{address: value}]
+                    "method": "spendspark",
+                    "params": [{address: {value, memo, False}}]
                 })).json()
 
         print(response)

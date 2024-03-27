@@ -65,7 +65,7 @@ col_tip_logs = db['tip_logs']
 col_envelopes = db['envelopes']
 col_txs = db['txs']
 
-bot = discord.Client()
+bot = discord.Client(intents=discord.Intents.default())
 
 last_channel = 0
 last_user = ""
@@ -77,6 +77,7 @@ async def send_to_logs(text):
         guild = discord.utils.get(bot.guilds, name=SERVER)
         if guild is not None:
             ch = discord.utils.get(guild.text_channels, name=LOG_CHANNEL)
+            print("GETTING LOGS CHANNEL")
             print(text)
             await ch.send(text)
         else:
@@ -191,8 +192,8 @@ async def update_balance():
         Update user's balance using transactions history
     """
     print("Handle TXs")
-    response = wallet_api.get_txs_list()
 
+    response = wallet_api.get_txs_list()
     for _tx in response['result']:
         try:
 
